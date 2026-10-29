@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Маргарита Еремина](https://up.htmlacademy.ru/javascript-individual/3/user/407511).
-* Наставник: `Неизвестно`.
+* Наставник: [Станислав Михайлов](https://htmlacademy.ru/profile/id139638).
 
 ---
 

@@ -1,8 +1,7 @@
-
-// Генерирует случайное целое число в интерале от min (включительно) до max(включительно)
+// Генерирует случайное положительное целое число в интерале от min (включительно) до max(включительно)
 function getRandomInteger (a, b) {
-  const min = Math.ceil(Math.min(a, b));
-  const max = Math.floor(Math.max((a, b)));
+  const min = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
+  const max = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
   const result = Math.random() * (max - min + 1) + min;
   return Math.floor(result);
 }

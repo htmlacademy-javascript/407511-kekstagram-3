@@ -1,6 +1,5 @@
 // Функция, отвечающая за отрисовку миниатюр
-function renderGallery (photos) {
-  const galleryElement = document.querySelector('.pictures');
+function renderGallery (photos, container) {
   const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const galleryFragment = document.createDocumentFragment();
 
@@ -15,7 +14,7 @@ function renderGallery (photos) {
     galleryFragment.append(photoElement);
   });
 
-  galleryElement.append(galleryFragment);
+  container.append(galleryFragment);
 }
 
 export {renderGallery};

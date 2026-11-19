@@ -1,4 +1,5 @@
 import {createPhotos} from './data.js';
+import {renderGallery} from './gallery.js';
 
-// eslint-disable-next-line no-console
-console.log(createPhotos());
+const galleryElement = document.querySelector('.pictures');
+renderGallery(createPhotos(), galleryElement);

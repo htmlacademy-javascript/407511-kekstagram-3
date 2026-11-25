@@ -1,4 +1,4 @@
-const MINUTES_PER_HOUR = 60;
+import {MINUTES_PER_HOUR} from './consts.js';
 
 // Функция принимает время в формате строки вида '08:00' и возвращает число минут
 function convertToMinutes (time) {
@@ -14,16 +14,8 @@ function checkIsMeetingInWorktime (dayStart, dayEnd, meetingStart, meetingDurati
   const dayEndInMinutes = convertToMinutes(dayEnd);
   const meetingStartInMinutes = convertToMinutes(meetingStart);
   const meetingEndInMinutes = meetingStartInMinutes + meetingDuration;
-  const isMeetingInWorktime = (meetingStartInMinutes >= dayStartInMinutes) && (meetingEndInMinutes <= dayEndInMinutes);
 
-  // eslint-disable-next-line no-console
-  console.log(`${[...arguments]} - ${isMeetingInWorktime}`);
-
-  return isMeetingInWorktime;
+  return (meetingStartInMinutes >= dayStartInMinutes) && (meetingEndInMinutes <= dayEndInMinutes);
 }
 
-checkIsMeetingInWorktime('08:00', '17:30', '14:00', 90); // true
-checkIsMeetingInWorktime('8:0', '10:0', '8:0', 120); // true
-checkIsMeetingInWorktime('08:00', '14:30', '14:00', 90); // false
-checkIsMeetingInWorktime('14:00', '17:30', '08:0', 90); // false
-checkIsMeetingInWorktime('8:00', '17:30', '08:00', 900); // false
+checkIsMeetingInWorktime('08:00', '17:30', '14:00', 90);

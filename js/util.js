@@ -29,4 +29,12 @@ function createIdGenerator (min, max) {
   };
 }
 
-export {getRandomArrElement, getRandomInteger, createIdGenerator};
+function isEscapeKey (evt) {
+  return evt.key === 'Escape';
+}
+
+function isEnterKey (evt) {
+  return evt.key === 'Enter';
+}
+
+export {getRandomArrElement, getRandomInteger, createIdGenerator, isEscapeKey, isEnterKey};

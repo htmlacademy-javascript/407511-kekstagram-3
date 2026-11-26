@@ -1,18 +1,27 @@
-function createPhotoElement (photo) {
-  const {url, description, likes, comments} = photo;
-  const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
-  const photoElement = photoTemplate.cloneNode(true);
-  photoElement.querySelector('.picture__img').src = url;
-  photoElement.querySelector('.picture__img').alt = description;
-  photoElement.querySelector('.picture__likes').textContent = likes;
-  photoElement.querySelector('.picture__comments').textContent = comments.length;
-  return photoElement;
+import {openBigPicture} from './big-picure.js';
+import {openModal} from './modal.js';
+import {renderElements} from './renderer.js';
+import {createPictureElement} from './picture.js';
+
+const galleryElement = document.querySelector('.pictures');
+
+function onGalleryClick (pictures, evt) {
+  const pictureElement = evt.target.closest('.picture');
+  if (pictureElement) {
+    const imageElement = pictureElement.querySelector('img');
+    const src = imageElement.attributes.src.value;
+    const picture = pictures.find((photo) => photo.url === src);
+    openBigPicture(picture);
+    openModal();
+  }
 }
 
-function renderGallery (photos, container) {
-  const galleryFragment = document.createDocumentFragment();
-  photos.forEach((photo) => galleryFragment.append(createPhotoElement(photo)));
-  container.append(galleryFragment);
+function renderGallery (pictures) {
+  renderElements(pictures, galleryElement, createPictureElement);
+  galleryElement.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    onGalleryClick(pictures, evt);
+  });
 }
 
 export {renderGallery};

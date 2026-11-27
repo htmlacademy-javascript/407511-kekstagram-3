@@ -1,5 +1,6 @@
-import {renderComments} from './comments.js';
-import {COMMENTS_SHOWN} from './consts.js';
+import {renderElements} from './renderer.js';
+import {deleteComments, createCommentElement} from './comments.js';
+import {COMMENTS_UPLOAD_STEP} from './consts.js';
 import {closeModal} from './modal.js';
 import {isEscapeKey} from './util.js';
 
@@ -11,19 +12,55 @@ const commentCountElement = bigPictureElement.querySelector('.social__comment-to
 const shownCommentCountElement = bigPictureElement.querySelector('.social__comment-shown-count');
 const captionElement = bigPictureElement.querySelector('.social__caption');
 const commentListElement = bigPictureElement.querySelector('.social__comments');
+const showMoreElement = bigPictureElement.querySelector('.comments-loader');
+
+let pictureComments = [];
+let shownCount = 0;
+
 
 function openBigPicture (picture) {
   const {url, description, likes, comments} = picture;
   imageElement.src = url;
   likesCountElement.textContent = likes;
-  shownCommentCountElement.textContent = COMMENTS_SHOWN < comments.length ? COMMENTS_SHOWN : comments.length;
-  commentCountElement.textContent = comments.length;
   captionElement.textContent = description;
 
-  renderComments(comments.slice(0, COMMENTS_SHOWN), commentListElement);
+  pictureComments = comments.slice();
+  shownCount = comments.length >= COMMENTS_UPLOAD_STEP ? COMMENTS_UPLOAD_STEP : comments.length;
+  shownCommentCountElement.textContent = shownCount;
+  commentCountElement.textContent = comments.length;
+
+  deleteComments();
+  renderElements(comments.slice(0, shownCount), commentListElement, createCommentElement);
+
+  if (comments.length > shownCount) {
+    showMoreButton();
+  } else {
+    hideMoreButton();
+  }
 
   bigPictureElement.classList.remove('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
+}
+
+function onMoreButtonClick () {
+  const comments = pictureComments.slice(shownCount, shownCount + COMMENTS_UPLOAD_STEP);
+  renderElements(comments, commentListElement, createCommentElement);
+  shownCount += comments.length;
+  shownCommentCountElement.textContent = shownCount;
+
+  if (shownCount === pictureComments.length) {
+    hideMoreButton();
+  }
+}
+
+function showMoreButton () {
+  showMoreElement.classList.remove('hidden');
+  showMoreElement.addEventListener('click', onMoreButtonClick);
+}
+
+function hideMoreButton () {
+  showMoreElement.classList.add('hidden');
+  showMoreElement.removeEventListener('click', onMoreButtonClick);
 }
 
 function onDocumentKeydown (evt) {

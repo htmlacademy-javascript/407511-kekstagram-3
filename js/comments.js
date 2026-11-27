@@ -1,5 +1,3 @@
-import {renderElements} from './renderer.js';
-
 const commentListElement = document.querySelector('.social__comments');
 const commentTemplate = document.querySelector('.social__comment');
 
@@ -16,9 +14,4 @@ function deleteComments () {
   commentListElement.innerHTML = '';
 }
 
-function renderComments (comments, container) {
-  deleteComments();
-  renderElements(comments, container, createCommentElement);
-}
-
-export {renderComments};
+export {deleteComments, createCommentElement};

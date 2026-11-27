@@ -33,8 +33,4 @@ function isEscapeKey (evt) {
   return evt.key === 'Escape';
 }
 
-function isEnterKey (evt) {
-  return evt.key === 'Enter';
-}
-
-export {getRandomArrElement, getRandomInteger, createIdGenerator, isEscapeKey, isEnterKey};
+export {getRandomArrElement, getRandomInteger, createIdGenerator, isEscapeKey};

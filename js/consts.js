@@ -1,6 +1,6 @@
 const PHOTO_COUNT = 25;
 
-const COMMENTS_SHOWN = 5;
+const COMMENTS_UPLOAD_STEP = 5;
 
 const CommentCount = {
   MIN: 0,
@@ -77,4 +77,4 @@ const COMMENT_MOCK = `Всё отлично!
 const MINUTES_PER_HOUR = 60;
 
 
-export {PHOTO_COUNT, CommentCount, Likes, AvatarId, PhotoId, CommentId, CommentLength, DescriptionLength, NAMES, DESCRIPTION_MOCK, COMMENT_MOCK, MINUTES_PER_HOUR, COMMENTS_SHOWN};
+export {PHOTO_COUNT, CommentCount, Likes, AvatarId, PhotoId, CommentId, CommentLength, DescriptionLength, NAMES, DESCRIPTION_MOCK, COMMENT_MOCK, MINUTES_PER_HOUR, COMMENTS_UPLOAD_STEP};
